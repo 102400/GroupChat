@@ -50,7 +50,7 @@ public class Updates extends JPanel {
 		textArea.setEditable(false);  //不可编辑
 		textArea.setLineWrap(true);  //自动换行
 		textArea.setWrapStyleWord(true);  //断行不断字
-		textArea.setText("下载地址:https://github.com/102400/GroupChat1/client_java/archive/master.zip\n网络问题可能会造成程序假死或崩溃");
+//		textArea.setText("下载地址:https://github.com/102400/GroupChat1/client_java/archive/master.zip\n网络问题可能会造成程序假死或崩溃");
 		add(new JScrollPane(textArea));  //滚动条
 		
 		JButton button = new JButton();
@@ -66,7 +66,7 @@ public class Updates extends JPanel {
 					public void run() {
 						// TODO Auto-generated method stub
 						try{
-							URL url = new URL("https://github.com/102400/GroupChat1/client_java/raw/master/changelog.txt");  //changelog.txt地址
+							URL url = new URL("https://raw.githubusercontent.com/102400/GroupChat1/master/client_java/changelog.txt");  //changelog.txt地址
 							URLConnection conn = url.openConnection();
 							BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 							latest = reader.readLine();
@@ -79,7 +79,7 @@ public class Updates extends JPanel {
 							{
 								temp.append(line+"\n");
 							}
-							temp.append("\n下载地址:https://github.com/102400/GroupChat1/client_java/archive/master.zip");
+//							temp.append("\n下载地址:https://github.com/102400/GroupChat1/client_java/archive/master.zip");
 							textArea.setText(new String(temp.toString()));
 							reader.close();
 						}

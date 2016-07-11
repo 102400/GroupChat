@@ -37,7 +37,7 @@ public class Connection implements Runnable {
 		read();
 	}
 	
-	public void read()
+	public void read()  //一旦抛异常,将不会读取
 	{
 		try
 		{
@@ -47,6 +47,7 @@ public class Connection implements Runnable {
 				//分析 line
 				//检测这个连接在哪个房间...
 				System.out.println(line);
+				System.out.println("进行了一次换行");
 			}
 		}
 		catch(IOException e)

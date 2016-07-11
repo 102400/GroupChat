@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import d.net.Room;
+import d.rule.RoomID;
+import d.rule.RoomPassword;
 
 public class RoomStartPanel extends JPanel {
 	
@@ -59,15 +61,28 @@ public class RoomStartPanel extends JPanel {
 				// TODO Auto-generated method stub
 				id = idtext.getText();
 				password = passwordtext.getText();
+				
+				
 				if(room==null)  //如果room不存在,则创建一个
 				{
-					room = new Room(id,password);
-					roompanel.setRoom(room);  //设置RoomPanel
+					//room id与password是否符合规则
+					boolean is_temp_roomid_legal = new RoomID(id).isLegal();
+					boolean is_temp_roompassword_legal = new RoomPassword(password).isLegal();
 					
-					idtext.setEditable(false);  //设置id及password文本框不可编辑
-					passwordtext.setEditable(false);
+					if(is_temp_roomid_legal&&is_temp_roompassword_legal)
+					{
+						room = new Room(id,password);
+						roompanel.setRoom(room);  //设置RoomPanel
+						
+						idtext.setEditable(false);  //设置id及password文本框不可编辑
+						passwordtext.setEditable(false);
+					}
+					else
+					{
+						System.out.println("room的id或(与)password不符合规则");
+						return;
+					}
 				}
-				
 				
 				//对房间进行启动和停止操作  ???
 				if(!isRoomStart)  //房间未开时,进行启动操作

@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Connection {
 	
@@ -21,9 +23,16 @@ public class Connection {
 	private PrintWriter pw;
 	private BufferedReader br;
 	
+//	private static HashSet<Connection> connection_set = new HashSet<>();  //所有连接的集合
+//	private static HashSet<String> hostport_set = new HashSet<>();  //所有连接的hostport String信息
+	
+	//所有连接的hostport String信息,尝试连接对象查询是否匹配到hostport信息,查询到则获取connection对象,没查询到则定义一个
+	public static HashMap<String,Connection> hostport_map = new HashMap<>(); 
+	private HashSet<Room> room_set = new HashSet<>();  //此连接的房间集合,必须host和port相同
+	
 	//客户端所有连接的集合
 	
-	public Connection(String serverhost,String serverport,String roomid,String roompassword,String userid,String userpassword)
+	public Connection(String serverhost,String serverport)
 	{
 		try
 		{
@@ -34,13 +43,9 @@ public class Connection {
 			e.printStackTrace();
 		}
 		this.server_port = Integer.valueOf(serverport);
-		this.room_id = roomid;
-		this.room_password = roompassword;
-		this.user_id = userid;
-		this.user_password = userpassword;
 	}
 	
-	public boolean tryConnect()
+	public boolean tryConnectServer()
 	{
 		try
 		{
@@ -55,9 +60,10 @@ public class Connection {
 					read();
 				}
 			}).start();
-			//发送connectRoom()命令
+			//发送connectServer()命令
 			//指令分析器在接收到服务器指令后返回 布尔值,并在logtext中显示 操作的结果
 			//超时则报错
+//			write("abc\\naaa");  //测试
 		}
 		catch(IOException e)
 		{
@@ -67,12 +73,22 @@ public class Connection {
 		return true;  //默认应为false
 	}
 	
+	public boolean tryConnectRoom(String roomid,String roompassword,String userid,String userpassword)  //尝试连接房间
+	{
+		this.room_id = roomid;
+		this.room_password = roompassword;
+		this.user_id = userid;
+		this.user_password = userpassword;
+		
+		return true;
+	}
+	
 	public void read()
 	{
 		while(true)
 		{
 			try
-			{
+			{  //可能要放个队列,不然来不及处理???
 				String line = br.readLine();
 				//line通过指令分析器进行处理
 				//首次连接在接受到服务器的指令后,连通到指令分析器进行处理
@@ -80,6 +96,8 @@ public class Connection {
 			catch(IOException e)
 			{
 				e.printStackTrace();
+				//此处应放入个计数器?
+				//如果与服务端停止了连接,此处就会不停的循环下去
 			}
 		}
 	}

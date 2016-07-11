@@ -1,6 +1,8 @@
 package gui.chat.groupchat.info.chat;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,6 +20,36 @@ public class LeftPanel extends JPanel {
 	public LeftPanel()
 	{
 		setLayout(new BorderLayout());
+		
+		display.setLineWrap(true);  //自动换行
+		display.setWrapStyleWord(true);  //断行不断字
+		input.setLineWrap(true);
+		input.setWrapStyleWord(true);
+		
+		input.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)  //当发生回车时
+				{
+					System.out.println(input.getText());
+					
+					input.setText(null);  //清除输入框
+				}
+			}
+		});
 		
 		topbottomsplit.setDividerLocation(650);  //分割条位置
 		add(topbottomsplit);
