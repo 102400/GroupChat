@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import d.net.Room;
 import d.rule.RoomID;
 import d.rule.RoomPassword;
+import gui.text.split.buttonlist.ButtonListPanel;
 
 public class RoomStartPanel extends JPanel {
 	
@@ -62,7 +63,6 @@ public class RoomStartPanel extends JPanel {
 				id = idtext.getText();
 				password = passwordtext.getText();
 				
-				
 				if(room==null)  //如果room不存在,则创建一个
 				{
 					//room id与password是否符合规则
@@ -71,11 +71,23 @@ public class RoomStartPanel extends JPanel {
 					
 					if(is_temp_roomid_legal&&is_temp_roompassword_legal)
 					{
-						room = new Room(id,password);
-						roompanel.setRoom(room);  //设置RoomPanel
-						
-						idtext.setEditable(false);  //设置id及password文本框不可编辑
-						passwordtext.setEditable(false);
+						//room的id是否存在
+						if(Room.roommap.get(id)==null)  //这个id在roommap里不存在
+						{
+							room = new Room(id,password);
+							roompanel.setRoom(room);  //设置RoomPanel
+							
+							idtext.setEditable(false);  //设置id及password文本框不可编辑
+							passwordtext.setEditable(false);
+							
+							//设置button的text为 name(id);
+							ButtonListPanel.stack.getLast().setButtonText("("+id+")");
+						}
+						else
+						{
+							System.out.println("room的id已在roommap中存在");
+							return;
+						}
 					}
 					else
 					{

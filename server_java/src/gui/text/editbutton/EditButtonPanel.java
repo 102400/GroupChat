@@ -30,96 +30,19 @@ public class EditButtonPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
 				NewText newtext = new NewText();
 				newtext.NT();
+				
+				
 //				ButtonListPanel.buttonlist.add(new Button());
 //				EditPanel.buttonlistpanel.add(ButtonListPanel.buttonlist.getLast(),0);
 //				EditPanel.buttonlistpanel.reload();
 			}
 		});
 		
-//		JButton openfilebutton = new JButton();
-//		openfilebutton.setText("打开");
-//		openfilebutton.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				OpenFile openfile = new OpenFile();
-//				openfile.OF();
-//				
-//			}
-//		});
-//		
-//		JButton jb2 = new JButton();  //未完成
-//		jb2.setText("另存为");
-//		jb2.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				SaveAs saveas = new SaveAs();
-//				saveas.SA();
-//			}
-//		});
-//		
-//		JButton savefilebutton = new JButton();
-//		savefilebutton.setText("保存");
-//		savefilebutton.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				SaveFile savefile = new SaveFile();
-//				savefile.SF();
-//			}
-//		});
-//		
-//		JButton saveallfilesbutton = new JButton();
-//		saveallfilesbutton.setText("全部保存");
-//		saveallfilesbutton.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				SaveAllFiles saveallfiles = new SaveAllFiles();
-//				saveallfiles.SAF();
-//			}
-//		});
-//		
-//		JButton closefilebutton = new JButton();
-//		closefilebutton.setText("关闭");
-//		closefilebutton.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				CloseFile closefile = new CloseFile();
-//				closefile.CF();
-//				
-//			}
-//		});
-//		
-//		JButton closeallfilesbutton = new JButton();
-//		closeallfilesbutton.setText("全部关闭");
-//		closeallfilesbutton.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				CloseAllFiles closeallfiles = new CloseAllFiles();
-//				closeallfiles.CAF();
-//			}
-//		});
-		
 		
 		add(newtextbutton);
-//		add(openfilebutton);
-//		add(jb2);
-//		add(savefilebutton);
-//		add(saveallfilesbutton);
-//		add(closefilebutton);
-//		add(closeallfilesbutton);
 	}
 
 }

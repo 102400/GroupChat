@@ -60,7 +60,7 @@ public class Updates extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Thread t = new Thread(new Runnable() {
+				new Thread() {
 					
 					@Override
 					public void run() {
@@ -88,8 +88,7 @@ public class Updates extends JPanel {
 							ex.printStackTrace();
 						}
 					}
-				});
-				t.start();
+				}.start();
 			}
 		});
 		add(button);

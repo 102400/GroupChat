@@ -7,6 +7,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import d.handler.ReceiveInstructionHandler;
+
+
 public class Connection implements Runnable {
 	
 	private Socket s;
@@ -15,7 +18,12 @@ public class Connection implements Runnable {
 	
 	private boolean isReadLine = true;
 	
-	private String userid;
+	private String userid;  //绑定的userid与password
+	private String userpassword;
+	
+	{
+		userid = "default";  //暂时设定
+	}
 	
 	public Connection(Socket s)
 	{
@@ -41,13 +49,38 @@ public class Connection implements Runnable {
 	{
 		try
 		{
+			int rows = 0;
+			String instruction;
+			StringBuilder sb = new StringBuilder();
+			
 			while(isReadLine)
 			{
-				String line = br.readLine();  //读取一行
-				//分析 line
-				//检测这个连接在哪个房间...
-				System.out.println(line);
-				System.out.println("进行了一次换行");
+				String line = br.readLine();  //读取指令行数
+				
+				if(rows==0)
+				{
+					rows = Integer.valueOf(line);
+					
+					line = br.readLine();  //指令行
+					instruction = line;
+					
+					for(int i=2;i<rows;i++)
+					{
+						line = br.readLine();
+						sb.append(line + '\n');
+					}
+					line = br.readLine();
+					sb.append(line);  //最后一行不加'\n'
+					
+//					System.out.println(sb.toString());
+					
+					new ReceiveInstructionHandler(this,instruction,userid,sb.toString()).handler();
+					
+					sb = new StringBuilder();
+					instruction = "";
+					rows = 0;
+				}
+				
 			}
 		}
 		catch(IOException e)
@@ -56,25 +89,25 @@ public class Connection implements Runnable {
 		}
 	}
 	
-	public void write(String message)  //接受message并发送
+	public synchronized void write(String message)  //接受message并发送
 	{
 		pw.println(message);
 		pw.flush();
 	}
 	
-	public void close()
-	{
-		isReadLine = false;
-		pw.close();
-		try
-		{
-			br.close();
-			s.close();
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
+//	public void close()
+//	{
+//		isReadLine = false;
+//		pw.close();
+//		try
+//		{
+//			br.close();
+//			s.close();
+//		}
+//		catch(IOException e)
+//		{
+//			e.printStackTrace();
+//		}
+//	}
 
 }

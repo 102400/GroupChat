@@ -1,3 +1,32 @@
+单个客户端可以连无限个主机端口,登陆无限个用户
+
+socket处理方式
+
+rows    readLine()的行数 
+instruction    执行指令
+message    执行内容
+
+instruction
+    Client:
+        ConnectRoom:
+            connectRoom
+            #roomid
+            #roompassword
+        
+        SendMessage:
+            sendMessage
+            #roomid
+            #chat_content
+            
+    Server:
+        SendMessage:
+            sendMessage
+            #userid
+            #time
+            #roomid
+            #chat_content
+
+
 rule
     ServerHost
         InetAddress.getByName(serverhost);

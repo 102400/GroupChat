@@ -56,10 +56,10 @@ public class NoEscapeCharacter {
 		return sb.toString();
 	}
 	
-//	public static void main(String[] args)
-//	{
-//		String a = new NoEscapeCharacter("\\\n\b\t\'\"\\\'").handle();
-//		System.out.println(a);
-//	}
+	public static void main(String[] args)
+	{
+		String a = new NoEscapeCharacter("\\\n\b\t\'\"\\\'").handle();
+		System.out.println(a);
+	}
 
 }

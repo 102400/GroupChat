@@ -40,7 +40,7 @@ public class Listen implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		Thread t = new Thread(new Runnable() {
+		new Thread() {
 			int tryconnect = 0;  //尝试连接总数
 			
 			@Override
@@ -74,8 +74,7 @@ public class Listen implements Runnable{
 				}
 			}
 			
-		});
-		t.start();
+		}.start();
 	}
 
 }

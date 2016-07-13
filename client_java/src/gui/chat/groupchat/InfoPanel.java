@@ -29,5 +29,10 @@ public class InfoPanel extends JPanel {
 		show.setVisible(true);
 		repaint();
 	}
+	
+	public ChatPanel getChatPanel()
+	{
+		return chatpanel;
+	}
 
 }

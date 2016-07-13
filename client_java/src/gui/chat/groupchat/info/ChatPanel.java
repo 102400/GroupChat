@@ -23,5 +23,10 @@ public class ChatPanel extends JPanel{
 		
 		add(leftrightsplit);
 	}
+	
+	public LeftPanel getLeftPanel()
+	{
+		return leftpanel;
+	}
 
 }
